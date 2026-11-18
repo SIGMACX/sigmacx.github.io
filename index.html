@@ -1,503 +1,480 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Chen Xi</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Chen Xi, Ph.D. candidate at Wuhan University. Research in medical image analysis, medical world models, and fetal medical imaging.">
+  <meta name="theme-color" content="#ffffff">
+  <meta property="og:title" content="Chen Xi 路 Academic Homepage">
+  <meta property="og:description" content="Research and publications in medical image analysis, medical world models, and fetal ultrasound imaging.">
+  <meta property="og:type" content="website">
+  <title>Chen Xi 路 Academic Homepage</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23264f6b'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='Georgia,serif' font-size='29' fill='white'%3ECX%3C/text%3E%3C/svg%3E">
   <style>
-    :root {
-      --primary: #1f4e79;
-      --accent: #2563eb;
-      --text: #222222;
-      --muted: #666666;
-      --border: #e5e7eb;
-      --card: #ffffff;
-      --light: #fafbfc;
-      --max-width: 980px;
-    }
+:root {
+  --ink: #000000;
+  --text: #4b4b4b;
+  --secondary: #666666;
+  --muted: #707070;
+  --accent: #285f82;
+  --accent-dark: #164665;
+  --line: #e3e7ea;
+  --soft: #f6f8fa;
+  --width: 960px;
+  --header: 61px;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header) + 20px); }
+body { margin: 0; background: #fff; color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+[hidden] { display: none !important; }
+h1, h2, h3, h4, p, figure { margin: 0; }
+a { color: var(--accent); text-decoration: none; text-underline-offset: 3px; }
+a:hover { color: var(--accent-dark); text-decoration: underline; }
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid #6c9cb9; outline-offset: 4px; }
+button, input { font: inherit; }
+button { cursor: pointer; }
+svg { display: block; flex-shrink: 0; }
+strong { color: var(--ink); font-weight: 650; }
+.container { width: min(var(--width), calc(100% - 64px)); margin-inline: auto; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+.skip-link { position: fixed; left: 16px; top: 10px; z-index: 100; padding: 8px 14px; background: #000; color: #fff; transform: translateY(-160%); }
+.skip-link:focus { transform: translateY(0); }
+.site-header { position: sticky; top: 0; z-index: 20; background: rgba(255,255,255,.98); border-top: 3px solid #355f7b; border-bottom: 1px solid var(--line); }
+.topbar { min-height: 57px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.brand { display: inline-flex; align-items: center; gap: 12px; color: #000; font-size: 16px; font-weight: 700; white-space: nowrap; }
+.brand:hover { text-decoration: none; }
+.brand-note { padding-left: 12px; border-left: 1px solid #d5dde3; font-size: 11px; font-weight: 400; color: var(--muted); }
+.nav-links { display: flex; align-items: center; gap: 25px; }
+.emoji-icon { font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif; font-variant-emoji: emoji; font-weight: 400; font-style: normal; line-height: 1; }
+.nav-icon { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; width: 20px; height: 22px; font-size: 17px; }
 
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+.nav-links a { display: inline-flex; align-items: center; gap: 6px; position: relative; padding: 18px 0 17px; color: #555555; font-size: 12px; font-weight: 500; line-height: 1.8; text-decoration: none; }
+.nav-links a::after { content: ""; position: absolute; bottom: 9px; left: 0; width: 100%; height: 2px; background: var(--accent); transform: scaleX(0); transition: transform .15s; }
+.nav-links a:hover, .nav-links a.active { color: var(--accent); }
+.nav-links a.active::after { transform: scaleX(1); }
+.page-layout { display: block; padding-top: 28px; }
+.profile-header { display: grid; grid-template-columns: 146px minmax(0,1fr); gap: 4px 28px; align-items: center; min-width: 0; padding: 0 0 23px; margin-bottom: 24px; border-bottom: 1px solid var(--line); }
+.portrait-frame { position: relative; grid-column: 1; grid-row: 1 / span 2; width: 146px; height: 146px; margin: 0; overflow: hidden; border-radius: 50%; background: #eff3f6; border: 5px solid #fff; outline: 1px solid #dce4ea; box-shadow: 0 4px 12px #20394d09; }
+.monogram { height: 100%; display: grid; place-items: center; color: #345c78; background: #edf3f7; }
+.monogram span { font-family: Georgia, "Times New Roman", serif; font-size: 58px; font-weight: 400; letter-spacing: -.065em; transform: translateX(-2px); }
+.profile-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 35%; }
+.profile-details { grid-column: 2; grid-row: 1; min-width: 0; text-align: left; }
+.profile-name { margin-top: 0; color: #000; font-size: 30px; font-weight: 700; line-height: 1.25; letter-spacing: -.035em; }
+.profile-role { margin-top: 4px; color: var(--secondary); font-size: 12px; font-weight: 500; }
+.profile-affiliation { margin-top: 6px; color: var(--secondary); font-size: 13px; line-height: 1.6; }
+.profile-location { display: flex; justify-content: flex-start; align-items: center; gap: 6px; margin-top: 6px; color: var(--muted); font-size: 11px; }
+.profile-links { grid-column: 2; grid-row: 2; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 22px; list-style: none; margin: 4px 0 0; padding: 0; }
+.profile-links li + li { margin-top: 0; }
+.profile-links a { display: flex; align-items: center; gap: 7px; width: fit-content; max-width: 100%; color: var(--accent); font-size: 12px; overflow-wrap: anywhere; }
+.profile-links svg { color: #597b94; }
+.content-column { min-width: 0; }
+.section { margin-bottom: 24px; }
+.section-heading { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 13px; padding-bottom: 9px; border-bottom: 1px solid var(--line); }
+h2 { display: flex; align-items: center; gap: 10px; color: #000; font-size: 22px; font-weight: 650; line-height: 1.3; letter-spacing: -.025em; }
+.about-heading { font-size: 24px; }
+.heading-icon { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 29px; font-size: 24px; flex-shrink: 0; }
+.intro { font-size: 15px; line-height: 1.7; }
+.intro p + p { margin-top: 8px; }
+.research-list { display: flex; flex-wrap: wrap; align-items: stretch; gap: 8px; margin-top: 2px; }
+.research-item { display: flex; align-items: center; gap: 7px; padding: 7px 10px; border: 1px solid #e5e9ec; border-radius: 4px; background: #fafbfc; min-width: 0; }
+.research-item::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: #7197b1; flex-shrink: 0; }
+.research-item h3 { color: #000; font-size: 12px; font-weight: 600; line-height: 1.5; }
+.methods { margin-top: 10px; color: var(--secondary); font-size: 12px; line-height: 1.7; }
+.methods strong { font-weight: 600; }
+.scholar-link { display: inline-flex; align-items: center; gap: 5px; color: var(--accent); font-size: 11px; white-space: nowrap; }
+.publication-tools { display: flex; justify-content: space-between; align-items: center; gap: 14px; margin-bottom: 17px; }
+.search-field { display: flex; align-items: center; gap: 8px; width: min(100%,350px); padding: 5px 9px; border: 1px solid #e0e6ea; border-radius: 4px; background: #fff; color: #7d8b96; }
+.search-field:focus-within { border-color: #6289a2; }
+.search-field input { width: 100%; min-width: 0; color: #000; font-size: 11px; line-height: 1.8; background: transparent; outline: none; border: 0; }
+.search-field input::placeholder { color: var(--muted); }
+.clear-search { padding: 1px 2px; border: 0; background: transparent; color: var(--accent); font-size: 10px; }
+.result-count { color: var(--muted); font-size: 11px; white-space: nowrap; }
+.paper-list { padding: 0 0 0 22px; margin: 0; }
+.publication { padding: 0 0 9px 3px; margin-bottom: 10px; border-bottom: 1px solid #eff1f3; }
+.publication:last-child { padding-bottom: 0; margin-bottom: 0; border-bottom: 0; }
+.publication::marker { color: var(--muted); font-size: 12px; font-weight: 500; font-variant-numeric: tabular-nums; }
+.pub-title { color: #000; font-size: 15px; font-weight: 650; line-height: 1.5; letter-spacing: -.01em; overflow-wrap: break-word; }
+.pub-authors { margin-top: 3px; color: var(--secondary); font-size: 12px; line-height: 1.6; }
+.pub-authors strong { color: #000; font-weight: 750; }
+.pub-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 11px; margin-top: 4px; }
+.pub-venue { color: var(--secondary); font-size: 12px; line-height: 1.5; font-style: italic; }
+.pub-links { display: flex; align-items: center; gap: 6px; }
+.pub-link { display: inline-flex; align-items: center; gap: 4px; padding: 1px 7px; border: 1px solid #d7e2ea; border-radius: 3px; color: var(--accent); background: #f7fafc; font-size: 10px; font-weight: 600; line-height: 1.6; white-space: nowrap; }
+.pub-link:hover { border-color: #a7c0d1; background: #edf4f9; text-decoration: none; }
+.pub-link svg { width: 10px; height: 10px; }
+.empty-state { padding: 24px 16px; text-align: center; background: var(--soft); border-radius: 5px; }
+.empty-state p { font-size: 14px; }
+.empty-state span { font-size: 12px; color: var(--muted); }
+.publication-tail { padding-top: 16px; color: var(--muted); font-size: 11px; }
+.contact-section { margin-bottom: 25px; }
+.contact-panel { padding: 14px 16px; border: 1px solid #e3e9ee; border-radius: 5px; background: #fafbfd; }
+.email-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.email-address { color: var(--accent); font-size: 14px; overflow-wrap: anywhere; }
+.copy-button { display: inline-flex; align-items: center; gap: 5px; padding: 3px 7px; color: #536f83; background: #fff; border: 1px solid #dbe4eb; border-radius: 3px; font-size: 10px; line-height: 1.5; }
+.copy-button:hover { border-color: #a6becf; color: #000; }
+.contact-panel address { margin-top: 7px; color: var(--secondary); font-size: 12px; font-style: normal; line-height: 1.6; }
+.contact-social { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; margin-top: 9px; }
+.contact-social a, .wechat-trigger { font-size: 11px; }
+.wechat-trigger { padding: 0; border: 0; background: transparent; color: var(--accent); }
+.wechat-trigger:hover { text-decoration: underline; }
+.copy-feedback { color: #496b57; font-size: 11px; }
+.copy-feedback:not(:empty) { margin-top: 8px; }
+.site-footer { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px 18px; padding: 14px 0 24px; border-top: 1px solid var(--line); color: var(--muted); font-size: 10px; }
+.footer-right { display: flex; align-items: center; gap: 18px; }
+.back-top { color: #526f85; }
+.visitor-card { display: inline-flex; align-items: center; gap: 5px; }
+.qr-dialog { padding: 25px; border: 1px solid var(--line); border-radius: 7px; width: 370px; max-width: calc(100vw - 36px); color: #000; box-shadow: 0 16px 60px #142c4133; }
+.qr-dialog::backdrop { background: #1c344973; }
+.dialog-top { display: flex; justify-content: space-between; align-items: center; gap: 20px; margin-bottom: 17px; }
+.dialog-top h2 { font-size: 20px; }
+.dialog-close { display: grid; place-items: center; width: 32px; height: 32px; border: 1px solid var(--line); border-radius: 4px; background: white; color: #000; }
+.qr-image { display: block; width: 100%; max-height: 380px; object-fit: contain; }
+.qr-caption { margin-top: 13px; color: var(--muted); font-size: 12px; text-align: center; }
+@media (max-width: 1000px) { .brand-note { display: none; } .research-item { padding: 6px 9px; } }
+@media (max-width: 800px) {
+  .container { width: calc(100% - 48px); }
+  .page-layout { display: block; padding-top: 24px; }
+  .profile-header { grid-template-columns: 110px minmax(0,1fr); gap: 4px 22px; padding-bottom: 20px; margin-bottom: 23px; }
+  .portrait-frame { width: 110px; height: 110px; border-width: 4px; }
+  .monogram span { font-size: 43px; }
+  .profile-details { text-align: left; }
+  .profile-name { margin-top: 0; font-size: 27px; }
+  .profile-role { margin-top: 3px; font-size: 12px; }
+  .profile-affiliation { margin-top: 6px; font-size: 12px; line-height: 1.6; }
+  .profile-location { justify-content: flex-start; margin-top: 6px; font-size: 10px; }
+  .profile-links { gap: 8px 18px; margin-top: 4px; }
+  .profile-links li + li { margin: 0; }
+  .profile-links a { font-size: 11px; }
+  .section { margin-bottom: 23px; }
+  .contact-section { margin-bottom: 23px; }
+}
+@media (max-width: 520px) {
+  :root { --header: 88px; }
+  .container { width: calc(100% - 36px); }
+  .topbar { min-height: 84px; flex-wrap: wrap; gap: 0; padding-top: 8px; }
+  .brand { width: 100%; font-size: 14px; }
+  .brand-note { display: inline; font-size: 10px; }
+  .nav-links { width: 100%; justify-content: space-between; gap: 6px; }
+  .nav-links a { padding: 8px 0 10px; font-size: 11px; gap: 4px; }
+  .nav-icon { width: 17px; height: 18px; font-size: 15px; }
+  .nav-links a::after { bottom: 5px; }
+  .page-layout { padding-top: 20px; }
+  .profile-header { grid-template-columns: 96px minmax(0,1fr); gap: 14px 18px; }
+  .portrait-frame { grid-row: 1; width: 96px; height: 96px; }
+  .monogram span { font-size: 38px; }
+  .profile-name { font-size: 25px; }
+  .profile-role, .profile-affiliation { font-size: 11px; }
+  .profile-links { grid-column: 1 / -1; grid-row: 2; gap: 9px 18px; margin-top: 0; }
+  .section-heading { gap: 12px; padding-bottom: 8px; margin-bottom: 12px; }
+  h2, .about-heading { font-size: 21px; gap: 8px; }
+  .heading-icon { width: 25px; height: 26px; font-size: 22px; }
+  .intro { font-size: 14px; line-height: 1.65; }
+  .research-list { gap: 7px; }
+  .research-item { padding: 6px 8px; }
+  .research-item h3 { font-size: 11px; }
+  .methods { font-size: 11px; }
+  .scholar-link { font-size: 10px; }
+  .publication-tools { flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+  .search-field { width: 100%; }
+  .result-count { font-size: 10px; }
+  .paper-list { padding-left: 19px; }
+  .publication { padding-left: 2px; }
+  .pub-title { font-size: 14px; }
+  .pub-authors, .pub-venue { font-size: 11px; }
+  .pub-meta { gap: 5px 9px; }
+  .contact-panel { padding: 13px 14px; }
+  .contact-social { gap: 16px; }
+}
+@media (max-width: 360px) { .container { width: calc(100% - 30px); } .profile-header { grid-template-columns: 80px minmax(0,1fr); gap: 14px; } .portrait-frame { width: 80px; height: 80px; } .profile-name { font-size: 23px; } .profile-links { gap: 8px 14px; } .section-heading { flex-wrap: wrap; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; animation: none !important; } }
+@media print {
+  body { color: #000; font-size: 10pt; background: white; }
+  .container { width: 100%; max-width: none; }
+  .site-header, .skip-link, .publication-tools, .back-top, .copy-button, .copy-feedback, .wechat-trigger, .visitor-card, .qr-dialog { display: none !important; }
+  .page-layout { display: block; padding-top: 0; }
+  .profile-header { grid-template-columns: 90px 1fr; gap: 4px 20px; padding: 0 0 16px; margin-bottom: 20px; border-bottom: 1px solid #ccc; }
+  .portrait-frame { grid-row: 1 / span 2; width: 90px; height: 90px; margin: 0; box-shadow: none; }
+  .profile-details { text-align: left; }
+  .profile-name { margin-top: 0; font-size: 24pt; }
+  .profile-location { justify-content: flex-start; }
+  .profile-links { grid-column: 2; grid-row: 2; display: flex; gap: 20px; margin: 0; padding: 0; border: 0; }
+  .profile-links li + li { margin: 0; }
+  .section { margin-bottom: 20px; }
+  h2, .about-heading { font-size: 16pt; }
+  .heading-icon { width: 24px; height: 24px; font-size: 20px; }
+  .intro { font-size: 10pt; }
+  .publication { break-inside: avoid; page-break-inside: avoid; }
+  .pub-title { font-size: 10pt; }
+  .pub-authors, .pub-venue { font-size: 8.5pt; }
+  .research-item, .pub-link, .contact-panel { background: white; }
+  .site-footer { padding-bottom: 0; }
+}
 
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      font-size: 14px;
-      line-height: 1.55;
-      color: var(--text);
-      background: #ffffff;
-    }
-
-    a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    a:hover { text-decoration: underline; }
-
-    .container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    .site-header {
-      border-bottom: 1px solid var(--border);
-      background: #ffffff;
-      position: sticky;
-      top: 0;
-      z-index: 20;
-    }
-
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
-      padding: 12px 0;
-    }
-
-    .brand {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--primary);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
-      font-size: 0.95rem;
-    }
-
-    .nav-links a {
-      color: var(--muted);
-      font-weight: 500;
-    }
-
-    .nav-links a:hover {
-      color: var(--primary);
-      text-decoration: none;
-    }
-
-    .hero {
-      padding: 28px 0 18px;
-    }
-
-    .hero-card {
-      display: flex;
-      gap: 28px;
-      align-items: center;
-      padding: 24px;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      background: var(--light);
-    }
-
-    .avatar {
-      width: 180px;
-      height: 180px;
-      border-radius: 10px;
-      object-fit: cover;
-      border: 1px solid var(--border);
-      flex-shrink: 0;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 2.2rem;
-      line-height: 1.2;
-      color: var(--primary);
-    }
-
-    .role {
-      margin-top: 8px;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-
-    .contact-mini {
-      margin-top: 8px;
-      color: var(--muted);
-    }
-
-    .profile-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 12px;
-    }
-
-    .profile-links a {
-      padding: 4px 9px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      background: #ffffff;
-      font-size: 0.92rem;
-    }
-
-    main {
-      padding-bottom: 24px;
-    }
-
-    section {
-      padding: 10px 0 16px;
-      margin-bottom: 12px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    section:last-of-type {
-      border-bottom: none;
-      margin-bottom: 0;
-    }
-
-    h2 {
-      margin: 0 0 10px;
-      font-size: 1.24rem;
-      color: var(--primary);
-    }
-
-    p {
-      margin: 0 0 8px;
-    }
-
-    .tag-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .tag {
-      padding: 3px 9px;
-      border-radius: 999px;
-      background: #f3f4f6;
-      border: 1px solid #e5e7eb;
-      color: #4b5563;
-      font-size: 0.86rem;
-    }
-
-    .publication {
-      padding: 10px 0;
-      border-bottom: 1px solid #eef0f3;
-    }
-
-    .publication:last-of-type {
-      border-bottom: none;
-    }
-
-    .pub-title {
-      font-weight: 700;
-      line-height: 1.45;
-    }
-
-    .pub-title a {
-      margin-left: 4px;
-      font-size: 0.92rem;
-      font-weight: 600;
-    }
-
-    .pub-authors,
-    .pub-venue {
-      margin-top: 2px;
-      color: var(--muted);
-      font-size: 0.93rem;
-    }
-
-    .contact-row {
-      display: flex;
-      gap: 22px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    .qr-block {
-      width: 136px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      flex-shrink: 0;
-      text-align: center;
-    }
-
-    .qr-toggle {
-      display: inline-block;
-      width: 136px;
-      height: 136px;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .qr-toggle img {
-      width: 136px;
-      height: 136px;
-      display: block;
-      border-radius: 4px;
-      object-fit: cover;
-      transition: opacity 0.25s ease;
-      user-select: none;
-    }
-
-    .qr-toggle .qr-real {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .qr-toggle .qr-placeholder {
-      position: relative;
-      z-index: 1;
-    }
-
-
-    .qr-toggle input {
-      display: none;
-    }
-
-    .qr-toggle input:checked ~ .qr-real {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .qr-toggle input:checked ~ .qr-placeholder {
-      opacity: 0;
-    }
-
-    .qr-toggle input:checked ~ .qr-overlay {
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .qr-overlay {
-      position: absolute;
-      inset: 0;
-      z-index: 2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: #ffffff;
-      background: rgba(31, 78, 121, 0.45);
-      transition: opacity 0.25s ease;
-    }
-
-    .qr-toggle:hover .qr-overlay {
-      background: rgba(31, 78, 121, 0.55);
-    }
-
-    .qr-label {
-      width: 100%; 
-      margin-top: 6px;
-      color: var(--muted);
-      font-size: 0.9rem;
-      transition: opacity 0.25s ease;
-    }
-
-    .qr-toggle input:checked ~ .qr-overlay + .qr-label,
-    .qr-block.revealed .qr-label {
-      opacity: 0;
-    }
-
-    footer {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 16px 24px 36px;
-      border-top: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 0.9rem;
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .visitor-card {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 4px 10px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      background: #fafafa;
-    }
-
-    .visitor-count {
-      color: var(--primary);
-      font-weight: 700;
-    }
-
-    @media (max-width: 720px) {
-      .hero-card {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .avatar {
-        width: 140px;
-        height: 140px;
-      }
-
-      h1 {
-        font-size: 1.8rem;
-      }
-    }
-
-    @media (max-width: 560px) {
-      .topbar {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-      }
-
-      .container,
-      footer {
-        padding-left: 18px;
-        padding-right: 18px;
-      }
-    }
   </style>
 </head>
-<body>
+<body id="top">
+  <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="container topbar">
-      <a class="brand" href="#top">Chen Xi</a>
-      <nav class="nav-links">
-        <a href="#about">About</a>
-        <a href="#research">Research</a>
-        <a href="#publications">Publications</a>
-        <a href="#contact">Contact</a>
-      </nav>
+      <a class="brand" href="#top" aria-label="Chen Xi, back to top">Chen Xi <span class="brand-note">Academic homepage</span></a>
+      <nav class="nav-links" aria-label="Main navigation"><a href="#about" class="active" aria-current="location"><span class="nav-icon emoji-icon" aria-hidden="true">馃檵</span>About</a><a href="#research"><span class="nav-icon emoji-icon" aria-hidden="true">馃И</span>Research</a><a href="#publications"><span class="nav-icon emoji-icon" aria-hidden="true">馃摎</span>Publications</a><a href="#contact"><span class="nav-icon emoji-icon" aria-hidden="true">鉁夛笍</span>Contact</a></nav>
     </div>
   </header>
-
-  <section class="hero" id="top">
-    <div class="container">
-      <div class="hero-card">
-        <img src="profile1.jpg" alt="Chen Xi" class="avatar" />
-        <div>
-          <h1>Chen Xi</h1>
-          <div class="role">
-            Ph.D. Candidate, School of Computer Science, Wuhan University<br>
-            Medical Image Analysis · Medical World Models · Fetal Ultrasound Intelligence
-          </div>
-          <div class="contact-mini">
-            <a href="mailto:yx.chen@whu.edu.cn">yx.chen@whu.edu.cn</a> · Wuhan, China
-          </div>
-          <div class="profile-links">
-            <a href="https://scholar.google.com/citations?user=QSplyxcAAAAJ&hl=zh-CN" target="_blank">Google Scholar</a>
-            <a href="https://github.com/SIGMACX" target="_blank">GitHub</a>
-          </div>
-        </div>
+  <div class="container page-layout">
+    <section class="profile-header" aria-labelledby="profile-name">
+      <figure class="portrait-frame">
+        <div class="monogram" id="portrait-fallback" aria-label="Chen Xi initials"><span aria-hidden="true">CX</span></div>
+        <!-- Add profile1.jpg in this folder to display the original portrait. -->
+        <img class="profile-image" id="profile-image" alt="Portrait of Chen Xi" width="146" height="146" decoding="async" hidden>
+      </figure>
+      <div class="profile-details">
+        <h1 class="profile-name" id="profile-name">Chen Xi</h1>
+        <p class="profile-role">Ph.D. Candidate</p>
+        <p class="profile-affiliation">School of Computer Science<br>Wuhan University</p>
+        <p class="profile-location"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2"/></svg>Wuhan, China</p>
       </div>
-    </div>
-  </section>
-
-  <main class="container">
-    <section id="about">
-      <h2>About</h2>
-      <p>
-        I am a Ph.D. candidate in the School of Computer Science at Wuhan University.
-        My research focuses on medical image analysis, medical world models, and intelligent
-        analysis of fetal medical images, with particular interests in ultrasound imaging,
-        segmentation, landmark detection, and multimodal learning.
-      </p>
+      <ul class="profile-links">
+        <li><a href="mailto:yx.chen@whu.edu.cn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>yx.chen@whu.edu.cn</a></li>
+        <li><a href="https://scholar.google.com/citations?user=QSplyxcAAAAJ&amp;hl=zh-CN" target="_blank" rel="noopener noreferrer"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m2 9 10-5 10 5-10 5-10-5Zm4 3v6c4 3 8 3 12 0v-6M22 9v8"/></svg>Google Scholar</a></li>
+        <li><a href="https://github.com/SIGMACX" target="_blank" rel="noopener noreferrer"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m8 7-5 5 5 5m8-10 5 5-5 5M14 4l-4 16"/></svg>GitHub</a></li>
+      </ul>
     </section>
-
-    <section id="research">
-      <h2>Research Interests</h2>
-      <div class="tag-list">
-        <span class="tag">Medical Image Analysis</span>
-        <span class="tag">Medical World Models</span>
-        <span class="tag">Fetal Ultrasound Imaging</span>
-        <span class="tag">Computer Vision</span>
-        <span class="tag">Semi-Supervised Learning</span>
-        <span class="tag">Multimodal Learning</span>
-      </div>
-    </section>
-
-    <section id="publications">
-      <h2>Publications</h2>
-
-      <div class="publication"><div class="pub-title">Class-Aware Reliability Calibration for Noisy Long-Tailed Semi-Supervised Medical Image Classification
-      </div><div class="pub-authors">X Chen, L Tong*, B Du*</div></div>
-      
-      <div class="publication"><div class="pub-title">PSCM: Pseudo-Label Self-Correction with Mask Learning for Semi-Supervised Medical Image Segmentation
-      </div><div class="pub-authors">X Chen, L Tong*, H Zhao, B Du*</div></div>
-      
-      <div class="publication"><div class="pub-title">TPL-SAM: Trustworthy Prompt Learning for Semi-Supervised Medical Image Segmentation
-      </div><div class="pub-authors">X Chen, L Tong*, B Du*</div></div>
-      
-      <div class="publication"><div class="pub-title">IUGC: A Benchmark of Landmark Detection in End-to-End Intrapartum Ultrasound Biometry 
-        <a href="https://www.sciencedirect.com/science/article/pii/S1361841526000290" target="_blank">[Paper]
-        </a></div><div class="pub-authors">J Bai, Y Tang, X Liu, J Hu, Y Li, X Chen, Y Wang, C Ma, Y Li, B Guo, J Jiao, et al.</div><div class="pub-venue">Medical Image Analysis, 2026.</div></div>
-      
-      <div class="publication"><div class="pub-title">Automatic Diagnosis of Early Pregnancy Fetal Nasal Bone Development Based on Complex Mid-Sagittal Section Ultrasound Imaging
-        <a href="https://www.sciencedirect.com/science/article/pii/S092523122500445X" target="_blank">[Paper]
-          <a href="https://github.com/SIGMACX/FNB-AD/tree/FNB-ADS" target="_blank">[Code]
-          </a></div><div class="pub-authors">X Chen, X Xu, L Tong, H Zhao, B Du</div><div class="pub-venue">Neurocomputing, 2025.</div></div>
-      
-      <div class="publication"><div class="pub-title">Pseudo-label Enhanced TransUNet for Robust Landmark Localization in Intrapartum Ultrasound 
-        <a href="https://link.springer.com/chapter/10.1007/978-3-032-11616-1_7" target="_blank">[Paper]
-        </a></div><div class="pub-authors">X Zhang, X Chen, H Yan, L Tong, B Du</div><div class="pub-venue">Intrapartum Ultrasound Grand Challenge, 2025.</div></div>
-      
-      <div class="publication"><div class="pub-title">Uncertainty-Guided Adaptive Correction for Semi-Supervised Medical Image Segmentation 
-        <a href="https://ieeexplore.ieee.org/abstract/document/11273087" target="_blank">[Paper]
-          <a href="https://github.com/SIGMACX/UGAC" target="_blank">[Code]
-          </a></div><div class="pub-authors">X Chen, L Tong, H Zhao, B Du</div><div class="pub-venue">IEEE Transactions on Image Processing, 2025.</div></div>
-      
-      <div class="publication"><div class="pub-title">PCLIM: Prototype-Based Category-Level Image-Text Multimodal Learning for Fetal Cardiac Ultrasound Imaging Analysis 
-        <a href="https://ieeexplore.ieee.org/abstract/document/11357174" target="_blank">[Paper]
-          <a href="https://github.com/SIGMACX/PCLIM" target="_blank">[Code]
-        </a></div><div class="pub-authors">X Chen, L Tong, B Du</div><div class="pub-venue">IEEE BIBM, 2025 (Oral).</div></div>
-      
-      <div class="publication"><div class="pub-title">A Novel Fast Reconstruction Method for Single Image Super Resolution Task 
-        <a href="https://link.springer.com/article/10.1007/s11063-023-11235-y" target="_blank">[Paper]
-        </a></div><div class="pub-authors">X Chen, H Zhao</div><div class="pub-venue">Neural Processing Letters, 2023.</div></div>
-      
-      <div class="publication"><div class="pub-title">SA-SinGAN: Self-Attention for Single-Image Generative Adversarial Networks 
-        <a href="https://link.springer.com/article/10.1007/s00138-021-01228-z" target="_blank">[Paper]
-        </a></div><div class="pub-authors">X Chen, H Zhao, D Yang, Y Li, Q Kang, H Lu</div><div class="pub-venue">Machine Vision and Applications, 2021.</div></div>
-
-      <p style="margin-top: 12px;">
-        <a href="https://scholar.google.com/citations?user=QSplyxcAAAAJ&hl=zh-CN" target="_blank">View complete list on Google Scholar.</a>
-      </p>
-    </section>
-
-    <section id="contact">
-      <h2>Contact</h2>
-      <div class="contact-row">
-        <div class="qr-block" onclick="this.classList.add('revealed')">
-          <label class="qr-toggle">
-            <input type="checkbox" aria-label="Reveal WeChat QR Code" />
-            <img src="profile1.jpg" alt="Preview Image" class="qr-placeholder" />
-            <img src="wechat_qr1.png" alt="WeChat QR Code" class="qr-real" />
-            <span class="qr-overlay">Click to Reveal</span>
-          </label>
-          <div class="qr-label">WeChat</div>
+    <main class="content-column" id="main">
+      <section class="section about-section" id="about" aria-labelledby="about-title">
+        <div class="section-heading"><h2 class="about-heading" id="about-title"><span class="heading-icon emoji-icon" aria-hidden="true">馃檵</span>About me</h2></div>
+        <div class="intro">
+          <p>I am a Ph.D. candidate in the School of Computer Science at <strong>Wuhan University</strong>. My research focuses on <strong>medical image analysis</strong>, <strong>medical world models</strong>, and intelligent analysis of fetal medical images.</p>
+          <p>I am particularly interested in ultrasound imaging, segmentation, landmark detection, and multimodal learning.</p>
         </div>
-        <div>
-          <p>
-            Chen Xi<br>
-            School of Computer Science, Wuhan University<br>
-            Wuhan, China<br>
-            <a href="mailto:yx.chen@whu.edu.cn">yx.chen@whu.edu.cn</a>
-          </p>
+      </section>
+      <section class="section research-section" id="research" aria-labelledby="research-title">
+        <div class="section-heading"><h2 id="research-title"><span class="heading-icon emoji-icon" aria-hidden="true">馃И</span>Research interests</h2></div>
+        <div class="research-list">
+          <article class="research-item"><h3>Medical Image Analysis</h3></article>
+          <article class="research-item"><h3>Medical World Models</h3></article>
+          <article class="research-item"><h3>Fetal Ultrasound Imaging</h3></article>
         </div>
-      </div>
-    </section>
-  </main>
+        <p class="methods"><strong>Methods &amp; foundations</strong> &nbsp;路&nbsp; Computer Vision &nbsp;路&nbsp; Semi-Supervised Learning &nbsp;路&nbsp; Multimodal Learning</p>
+      </section>
+      <section class="section publications-section" id="publications" aria-labelledby="publications-title">
+        <div class="section-heading"><h2 id="publications-title"><span class="heading-icon emoji-icon" aria-hidden="true">馃摎</span>Publications</h2><a class="scholar-link" href="https://scholar.google.com/citations?user=QSplyxcAAAAJ&amp;hl=zh-CN" target="_blank" rel="noopener noreferrer">Google Scholar <span aria-hidden="true">鈫?/span></a></div>
+        <div class="publication-tools" id="publication-tools" hidden>
+          <div class="search-field"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><label class="sr-only" for="paper-search">Search by title, author, venue, or year</label><input type="search" id="paper-search" placeholder="Search titles, authors, venues, or years鈥? autocomplete="off" spellcheck="false" aria-controls="publication-list"><button class="clear-search" id="clear-search" type="button" hidden>Clear</button></div>
+          <p class="result-count" id="result-count" role="status" aria-live="polite" aria-atomic="true">10 works</p>
+        </div>
+        <ol class="paper-list" id="publication-list"><li class="publication" data-year="2026" data-search="IUGC: A Benchmark of Landmark Detection in End-to-End Intrapartum Ultrasound Biometry J Bai, Y Tang, X Liu, J Hu, Y Li, X Chen, Y Wang, C Ma, Y Li, B Guo, J Jiao, et al. Medical Image Analysis, 2026.">
+<h3 class="pub-title">IUGC: A Benchmark of Landmark Detection in End-to-End Intrapartum Ultrasound Biometry</h3>
+<p class="pub-authors">J Bai, Y Tang, X Liu, J Hu, Y Li, <strong>X Chen</strong>, Y Wang, C Ma, Y Li, B Guo, J Jiao, et al.</p>
+<div class="pub-meta">
+<p class="pub-venue">Medical Image Analysis, 2026.</p>
+<div class="pub-links">
+<a class="pub-link" href="https://www.sciencedirect.com/science/article/pii/S1361841526000290" target="_blank" rel="noopener noreferrer" aria-label="Paper: IUGC: A Benchmark of Landmark Detection in End-to-End Intrapartum Ultrasound Biometry">Paper<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 3h7v7M21 3 10 14"/><path d="M11 5H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/></svg></a>
+</div>
+</div>
+</li>
+<li class="publication" data-year="2025" data-search="Automatic Diagnosis of Early Pregnancy Fetal Nasal Bone Development Based on Complex Mid-Sagittal Section Ultrasound Imaging X Chen, X Xu, L Tong, H Zhao, B Du Neurocomputing, 2025.">
+<h3 class="pub-title">Automatic Diagnosis of Early Pregnancy Fetal Nasal Bone Development Based on Complex Mid-Sagittal Section Ultrasound Imaging</h3>
+<p class="pub-authors"><strong>X Chen</strong>, X Xu, L Tong, H Zhao, B Du</p>
+<div class="pub-meta">
+<p class="pub-venue">Neurocomputing, 2025.</p>
+<div class="pub-links">
+<a class="pub-link" href="https://www.sciencedirect.com/science/article/pii/S092523122500445X" target="_blank" rel="noopener noreferrer" aria-label="Paper: Automatic Diagnosis of Early Pregnancy Fetal Nasal Bone Development Based on Complex Mid-Sagittal Section Ultrasound Imaging">Paper<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 3h7v7M21 3 10 14"/><path d="M11 5H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/></svg></a>
+<a class="pub-link" href="https://github.com/SIGMACX/FNB-AD/tree/FNB-ADS" target="_blank" rel="noopener noreferrer" aria-label="Code: Automatic Diagnosis of Early Pregnancy Fetal Nasal Bone Development Based on Complex Mid-Sagittal Section Ultrasound Imaging">Code<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 3h7v7M21 3 10 14"/><path d="M11 5H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/></svg></a>
+</div>
+</div>
+</li>
+<li class="publication" data-year="2025" data-search="Pseudo-label Enhanced TransUNet for Robust Landmark Localization in Intrapartum Ultrasound X Zhang, X Chen, H Yan, L Tong, B Du Intrapartum Ultrasound Grand Challenge, 2025.">
+<h3 class="pub-title">Pseudo-label Enhanced TransUNet for Robust Landmark Localization in Intrapartum Ultrasound</h3>
+<p class="pub-authors">X Zhang, <strong>X Chen</strong>, H Yan, L Tong, B Du</p>
+<div class="pub-meta">
+<p class="pub-venue">Intrapartum Ultrasound Grand Challenge, 2025.</p>
+<div class="pub-links">
+<a class="pub-link" href="https://link.springer.com/chapter/10.1007/978-3-032-11616-1_7" target="_blank" rel="noopener noreferrer" aria-label="Paper: Pseudo-label Enhanced TransUNet for Robust Landmark Localization in Intrapartum Ultrasound">Paper<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 3h7v7M21 3 10 14"/><path d="M11 5H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/></svg></a>
+</div>
+</div>
+</li>
+<li class="publication" data-year="2025" data-search="Uncertainty-Guided Adaptive Correction for Semi-Supervised Medical Image Segmentation X Chen, L Tong, H Zhao, B Du IEEE Transactions on Image Processing, 2025.">
+<h3 class="pub-title">Uncertainty-Guided Adaptive Correction for Semi-Supervised Medical Image Segmentation</h3>
+<p class="pub-authors"><strong>X Chen</strong>, L Tong, H Zhao, B Du</p>
+<div class="pub-meta">
+<p class="pub-venue">IEEE Transactions on Image Processing, 2025.</p>
+<div class="pub-links">
+<a class="pub-link" href="https://ieeexplore.ieee.org/abstract/document/11273087" target="_blank" rel="noopener noreferrer" aria-label="Paper: Uncertainty-Guided Adaptive Correction for Semi-Supervised Medical Image Segmentation">Paper<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 3h7v7M21 3 10 14"/><path d="M11 5H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/></svg></a>
+<a class="pub-link" href="https://github.com/SIGMACX/UGAC" target="_blank" rel="noopener noreferrer" aria-label="Code: Uncertainty-Guided Adaptive Correction for Semi-Supervised Medical Image Segmentation">Code<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 3h7v7M21 3 10 14"/><path d="M11 5H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/></svg></a>
+</div>
+</div>
+</li>
+<li class="publication" data-year="2025" data-search="PCLIM: Prototype-Based Category-Level Image-Text Multimodal Learning for Fetal Cardiac Ultrasound Imaging Analysis X Chen, L Tong, B Du IEEE BIBM, 2025 (Oral).">
+<h3 class="pub-title">PCLIM: Prototype-Based Category-Level Image-Text Multimodal Learning for Fetal Cardiac Ultrasound Imaging Analysis</h3>
+<p class="pub-authors"><strong>X Chen</strong>, L Tong, B Du</p>
+<div class="pub-meta">
+<p class="pub-venue">IEEE BIBM, 2025 (Oral).</p>
+<div class="pub-links">
+<a class="pub-link" href="https://ieeexplore.ieee.org/abstract/document/11357174" target="_blank" rel="noopener noreferrer" aria-label="Paper: PCLIM: Prototype-Based Category-Level Image-Text Multimodal Learning for Fetal Cardiac Ultrasound Imaging Analysis">Paper<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 3h7v7M21 3 10 14"/><path d="M11 5H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/></svg></a>
+<a class="pub-link" href="https://github.com/SIGMACX/PCLIM" target="_blank" rel="noopener noreferrer" aria-label="Code: PCLIM: Prototype-Based Category-Level Image-Text Multimodal Learning for Fetal Cardiac Ultrasound Imaging Analysis">Code<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 3h7v7M21 3 10 14"/><path d="M11 5H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/></svg></a>
+</div>
+</div>
+</li>
+<li class="publication" data-year="2023" data-search="A Novel Fast Reconstruction Method for Single Image Super Resolution Task X Chen, H Zhao Neural Processing Letters, 2023.">
+<h3 class="pub-title">A Novel Fast Reconstruction Method for Single Image Super Resolution Task</h3>
+<p class="pub-authors"><strong>X Chen</strong>, H Zhao</p>
+<div class="pub-meta">
+<p class="pub-venue">Neural Processing Letters, 2023.</p>
+<div class="pub-links">
+<a class="pub-link" href="https://link.springer.com/article/10.1007/s11063-023-11235-y" target="_blank" rel="noopener noreferrer" aria-label="Paper: A Novel Fast Reconstruction Method for Single Image Super Resolution Task">Paper<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 3h7v7M21 3 10 14"/><path d="M11 5H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/></svg></a>
+</div>
+</div>
+</li>
+<li class="publication" data-year="2021" data-search="SA-SinGAN: Self-Attention for Single-Image Generative Adversarial Networks X Chen, H Zhao, D Yang, Y Li, Q Kang, H Lu Machine Vision and Applications, 2021.">
+<h3 class="pub-title">SA-SinGAN: Self-Attention for Single-Image Generative Adversarial Networks</h3>
+<p class="pub-authors"><strong>X Chen</strong>, H Zhao, D Yang, Y Li, Q Kang, H Lu</p>
+<div class="pub-meta">
+<p class="pub-venue">Machine Vision and Applications, 2021.</p>
+<div class="pub-links">
+<a class="pub-link" href="https://link.springer.com/article/10.1007/s00138-021-01228-z" target="_blank" rel="noopener noreferrer" aria-label="Paper: SA-SinGAN: Self-Attention for Single-Image Generative Adversarial Networks">Paper<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 3h7v7M21 3 10 14"/><path d="M11 5H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/></svg></a>
+</div>
+</div>
+</li>
+<li class="publication" data-year="" data-search="Class-Aware Reliability Calibration for Noisy Long-Tailed Semi-Supervised Medical Image Classification X Chen, L Tong*, B Du* ">
+<h3 class="pub-title">Class-Aware Reliability Calibration for Noisy Long-Tailed Semi-Supervised Medical Image Classification</h3>
+<p class="pub-authors"><strong>X Chen</strong>, L Tong*, B Du*</p>
+</li>
+<li class="publication" data-year="" data-search="PSCM: Pseudo-Label Self-Correction with Mask Learning for Semi-Supervised Medical Image Segmentation X Chen, L Tong*, H Zhao, B Du* ">
+<h3 class="pub-title">PSCM: Pseudo-Label Self-Correction with Mask Learning for Semi-Supervised Medical Image Segmentation</h3>
+<p class="pub-authors"><strong>X Chen</strong>, L Tong*, H Zhao, B Du*</p>
+</li>
+<li class="publication" data-year="" data-search="TPL-SAM: Trustworthy Prompt Learning for Semi-Supervised Medical Image Segmentation X Chen, L Tong*, B Du* ">
+<h3 class="pub-title">TPL-SAM: Trustworthy Prompt Learning for Semi-Supervised Medical Image Segmentation</h3>
+<p class="pub-authors"><strong>X Chen</strong>, L Tong*, B Du*</p>
+</li></ol>
+        <div class="empty-state" id="empty-state" hidden><p>No matching work found.</p><span>Try another title, author, venue, or year.</span></div>
+        <p class="publication-tail">For the complete publication record, visit <a href="https://scholar.google.com/citations?user=QSplyxcAAAAJ&amp;hl=zh-CN" target="_blank" rel="noopener noreferrer">Google Scholar</a>.</p>
+      </section>
+      <section class="section contact-section" id="contact" aria-labelledby="contact-title">
+        <div class="section-heading"><h2 id="contact-title"><span class="heading-icon emoji-icon" aria-hidden="true">鉁夛笍</span>Contact</h2></div>
+        <div class="contact-panel">
+          <div class="email-row"><a class="email-address" href="mailto:yx.chen@whu.edu.cn">yx.chen@whu.edu.cn</a><button class="copy-button" id="copy-email" type="button" aria-label="Copy email address" hidden><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M15 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h3"/></svg>Copy</button></div>
+          <address>School of Computer Science, Wuhan University<br>Wuhan, China</address>
+          <div class="contact-social"><a href="https://scholar.google.com/citations?user=QSplyxcAAAAJ&amp;hl=zh-CN" target="_blank" rel="noopener noreferrer">Google Scholar 鈫?/a><a href="https://github.com/SIGMACX" target="_blank" rel="noopener noreferrer">GitHub 鈫?/a><button class="wechat-trigger" id="wechat-trigger" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="wechat-dialog" hidden>WeChat</button></div>
+          <p class="copy-feedback" id="copy-feedback" role="status" aria-live="polite"></p>
+        </div>
+      </section>
+      <footer class="site-footer"><span>漏 2026 Chen Xi</span><div class="footer-right"><span class="visitor-card" id="visitor-card" hidden>Site views <span id="busuanzi_value_site_pv"></span></span><a class="back-top" href="#top">Back to top 鈫?/a></div></footer>
+    </main>
+  </div>
+  <dialog class="qr-dialog" id="wechat-dialog" aria-labelledby="wechat-title"><div class="dialog-top"><h2 id="wechat-title">WeChat</h2><button class="dialog-close" id="dialog-close" type="button" aria-label="Close WeChat QR code"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div><img class="qr-image" id="qr-image" alt="Chen Xi's WeChat QR code"><p class="qr-caption">Scan with WeChat to connect.</p></dialog>
+  <script>
+    (() => {
+      'use strict';
+      // Optional original assets. No broken image or fabricated QR is shown if absent.
+      const portrait = new Image();
+      portrait.onload = () => {
+        const target = document.getElementById('profile-image');
+        target.src = portrait.src;
+        target.hidden = false;
+        document.getElementById('portrait-fallback').hidden = true;
+      };
+      portrait.onerror = () => {};
+      portrait.src = 'profile1.jpg';
 
-  <footer>
-    <div>© 2026 Chen Xi · Powered by GitHub Pages</div>
-    <div class="visitor-card" title="Total site visits">
-      <span>👁</span>
-      <span>Total Views</span>
-      <span class="visitor-count" id="busuanzi_value_site_pv">--</span>
-    </div>
-  </footer>
+      const trigger = document.getElementById('wechat-trigger');
+      const dialog = document.getElementById('wechat-dialog');
+      const qr = new Image();
+      qr.onload = () => {
+        document.getElementById('qr-image').src = qr.src;
+        if (typeof dialog.showModal === 'function') trigger.hidden = false;
+      };
+      qr.onerror = () => {};
+      qr.src = 'wechat_qr1.png';
+      trigger.addEventListener('click', () => { dialog.showModal(); trigger.setAttribute('aria-expanded', 'true'); });
+      document.getElementById('dialog-close').addEventListener('click', () => dialog.close());
+      dialog.addEventListener('close', () => { trigger.setAttribute('aria-expanded', 'false'); trigger.focus(); });
+      dialog.addEventListener('click', event => {
+        if (event.target !== dialog) return;
+        const r = dialog.getBoundingClientRect();
+        if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) dialog.close();
+      });
 
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      const search = document.getElementById('paper-search');
+      const clear = document.getElementById('clear-search');
+      const papers = Array.from(document.querySelectorAll('.publication'));
+      const normalize = value => value.normalize('NFKD').toLowerCase().replace(/\s+/g, ' ').trim();
+      const searchable = papers.map(paper => normalize(paper.dataset.search));
+      function filterPapers() {
+        const query = normalize(search.value);
+        const terms = query.split(' ').filter(Boolean);
+        let count = 0;
+        papers.forEach((paper, index) => {
+          const matches = terms.every(term => searchable[index].includes(term));
+          paper.hidden = !matches;
+          if (matches) count++;
+        });
+        document.getElementById('empty-state').hidden = count !== 0;
+        document.getElementById('result-count').textContent = query ? `${count} ${count === 1 ? 'result' : 'results'} of ${papers.length} works` : `${papers.length} works`;
+        clear.hidden = query.length === 0;
+      }
+      document.getElementById('publication-tools').hidden = false;
+      search.addEventListener('input', filterPapers);
+      clear.addEventListener('click', () => { search.value = ''; filterPapers(); search.focus(); });
+
+      const copy = document.getElementById('copy-email');
+      copy.hidden = false;
+      let feedbackTimer;
+      copy.addEventListener('click', async () => {
+        const email = 'yx.chen@whu.edu.cn';
+        let succeeded = false;
+        try {
+          if (navigator.clipboard && window.isSecureContext) { await navigator.clipboard.writeText(email); succeeded = true; }
+        } catch (_) {}
+        if (!succeeded) {
+          const input = document.createElement('textarea');
+          input.value = email;
+          input.setAttribute('readonly', '');
+          input.style.cssText = 'position:fixed;top:0;left:-9999px;';
+          document.body.appendChild(input);
+          input.select();
+          try { succeeded = document.execCommand('copy'); } catch (_) {}
+          input.remove();
+          copy.focus();
+        }
+        const feedback = document.getElementById('copy-feedback');
+        feedback.textContent = succeeded ? 'Email address copied.' : 'Please select and copy the email address.';
+        window.clearTimeout(feedbackTimer);
+        feedbackTimer = window.setTimeout(() => { feedback.textContent = ''; }, 4000);
+      });
+
+      const navLinks = Array.from(document.querySelectorAll('.nav-links a'));
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(entries => {
+          entries.filter(entry => entry.isIntersecting).forEach(entry => {
+            navLinks.forEach(link => {
+              const active = link.hash === '#' + entry.target.id;
+              link.classList.toggle('active', active);
+              if (active) link.setAttribute('aria-current', 'location'); else link.removeAttribute('aria-current');
+            });
+          });
+        }, {rootMargin: '-16% 0px -66% 0px', threshold: 0});
+        ['about', 'research', 'publications', 'contact'].forEach(id => observer.observe(document.getElementById(id)));
+      }
+
+      // Retain the original optional Busuanzi counter only for a deployed HTTP(S) page.
+      // Set this to false to disable the third-party counter.
+      const ENABLE_VISITOR_COUNTER = true;
+      if (ENABLE_VISITOR_COUNTER && /^https?:$/.test(location.protocol) && !['localhost','127.0.0.1','[::1]'].includes(location.hostname)) {
+        const count = document.getElementById('busuanzi_value_site_pv');
+        const card = document.getElementById('visitor-card');
+        const watch = new MutationObserver(() => {
+          if (/^\d[\d,]*$/.test(count.textContent.trim())) { card.hidden = false; watch.disconnect(); }
+        });
+        watch.observe(count, {childList:true, subtree:true, characterData:true});
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js';
+        script.onerror = () => { watch.disconnect(); card.hidden = true; };
+        document.body.appendChild(script);
+        window.setTimeout(() => watch.disconnect(), 15000);
+      }
+    })();
+  </script>
 </body>
 </html>
